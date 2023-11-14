@@ -19,6 +19,7 @@
         "moment": "^2.29.4",
         "node-fetch": "2.6.7",
         "nodemon": "^2.0.20",
+        "simple-oauth2": "^5.0.0",
         "ts-node": "^10.9.1",
         "tsc": "^2.0.4"
     },

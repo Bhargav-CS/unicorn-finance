@@ -1,19 +1,43 @@
 const axios = require('axios');
 
-const { ACCESS_TOKEN_URL, ACCESS_TOKEN_USERNAME, ACCESS_TOKEN_SECRET } = process.env;
+const {
+  CLIENT_ID, CLIENT_SECRET, TOKEN_HOST, TOKEN_PATH, SCOPE,
+} = process.env;
+
+const config = {
+  client: {
+    id: CLIENT_ID,
+    secret:
+      CLIENT_SECRET,
+  },
+  auth: {
+    tokenHost: TOKEN_HOST,
+    tokenPath: TOKEN_PATH,
+  },
+};
+
+const { ClientCredentials } = require('simple-oauth2');
+
+const client = new ClientCredentials(config);
+
+const tokenParams = {
+  scope: SCOPE,
+};
+
+async function generateAccessToken() {
+  try {
+    return await client.getToken(tokenParams);
+  } catch (error) {
+    console.error('Error gathering access token: ', error.message);
+  }
+  return undefined;
+}
 
 const gatherAccessToken = async () => {
-  const config = {
-    method: 'get',
-    url: ACCESS_TOKEN_URL,
-    headers: {
-      username: ACCESS_TOKEN_USERNAME,
-      secret: ACCESS_TOKEN_SECRET,
-    },
-  };
   try {
-    const response = await axios.request(config);
-    return response.data.accessToken;
+    const response = await generateAccessToken();
+    console.log(response);
+    return response.token.access_token;
   } catch (error) {
     console.error(error);
   }

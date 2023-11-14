@@ -117,7 +117,7 @@ app.use('/api/digitalSignature/*', async (req, res, next) => {
 app.use('/api/sandbox/*', async (req, res, next) => {
   const accessToken = await gatherAccessToken();
   if (accessToken) {
-    const func = await createProxyConfigurationForSandbox('https://api-mock-akm-ptpoc.payments.jpmorgan.com', accessToken);
+    const func = await createProxyConfigurationForSandbox('https://api-mock.payments.jpmorgan.com', accessToken);
     func(req, res, next);
   }
 });
