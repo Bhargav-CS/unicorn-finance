@@ -1,5 +1,3 @@
-const axios = require('axios');
-
 const {
   CLIENT_ID, CLIENT_SECRET, TOKEN_HOST, TOKEN_PATH, SCOPE,
 } = process.env;
